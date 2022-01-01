@@ -1,0 +1,133 @@
+﻿@model patient
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+}
+
+
+<script src="~/ckeditor/ckeditor.js"></script>
+<form asp-action="Create" style="margin-top:30px;background-color:azure">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+
+        <div class="form-group col-4">
+
+            <label asp-for="name_patient" class="control-label"></label>
+            <input asp-for="name_patient" class="form-control" placeholder="اسم المريض" />
+            <span asp-validation-for="name_patient" class="text-danger"></span>
+        </div>
+        <div class="form-group col-4">
+            <label asp-for="code" class="control-label"></label>
+            <input asp-for="code" class="form-control text-center" style="width:60%" />
+            <span asp-validation-for="code" class="text-danger"></span>
+
+        </div>
+        <div class="form-group col-4">
+
+            <label asp-for="age" class="control-label text-right"></label>
+            <input asp-for="age" class="form-control text-center" style="width:60%" />
+            <span asp-validation-for="age" class="text-danger"></span>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-4">
+
+            <label asp-for="phone_patient" class="control-label"></label>
+            <input asp-for="phone_patient" class="form-control" placeholder="رقم التليفون" />
+            <span asp-validation-for="phone_patient" class="text-danger"></span>
+
+        </div>
+        <div class="form-group col-4">
+
+            <label asp-for="adress_patient" class="control-label"></label>
+            <input asp-for="adress_patient" class="form-control" placeholder="العنوان" />
+            <span asp-validation-for="adress_patient" class="text-danger"></span>
+        </div>
+        <div class="form-group col-4">
+
+            <label asp-for="addtime" class="control-label"></label>
+            <input type="text" asp-for="addtime" class="form-control" id="addtime" />
+            <span asp-validation-for="addtime" class="text-danger"></span>
+        </div>
+        <div class="form-group col-4">
+
+            <label asp-for="type_kashf" class="control-label"></label>
+            <select asp-for="type_kashf" class="form-control">
+                <option selected disabled>---اختر----</option>
+                <option>استشاره</option>
+                <option>اعاده</option>
+            </select>
+            <span asp-validation-for="type_kashf" class="text-danger"></span>
+
+        </div>
+
+
+    </div>
+
+    @*<div class="row">
+
+
+        </div>*@
+
+
+    @*<div class="form-group">
+            <label asp-for="addtime" class="control-label"></label>
+            <input asp-for="addtime" class="form-control" />
+            <span asp-validation-for="addtime" class="text-danger"></span>
+        </div>*@
+
+    <div class="row">
+        <div class="form-group col-8">
+
+            <label asp-for="notes" class="control-label"></label>
+            <textarea asp-for="notes" class="form-control text-right" id="notes"></textarea>
+
+            <span asp-validation-for="notes" class="text-danger"></span>
+        </div>
+
+        <div class="form-group col-2">
+
+            <label asp-for="paied" class="control-label"></label>
+            <input asp-for="paied" class="form-control text-center" style="width:80%" />
+            <span asp-validation-for="paied" class="text-danger"></span>
+            <div class="form-group" style="margin-top:20px;">
+                <input type="submit" value="انشاءوحجز" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+
+
+</form>
+
+<div>
+    <a asp-action="Index">الرجوع الى الصفحة الرئيسيه</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="~/js/site.js"></script>
+    <script type="text/javascript">
+
+        CKEDITOR.replace("notes");
+        $(function () {
+            $('#addtime').datepicker({
+                numberOfmonths: 1,
+                changeYear: true,
+                changemonth: true,
+                showOthermonths: true
+                //uiLibrary: 'bootstrap4',
+                //modal: true,
+                //footer: true
+            });
+        });
+
+    </script>
+
+
+
+}

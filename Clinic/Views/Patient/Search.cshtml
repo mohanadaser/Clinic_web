@@ -1,0 +1,96 @@
+﻿@model IEnumerable<patient>
+
+@{
+    ViewData["Title"] = "Search";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="container mt-4">
+    <table class="table table-bordered table-striped table-hover" style="margin-top:30px;" id="mytable">
+        <thead style="background-color:aqua;">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.code)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.name_patient)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.phone_patient)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.adress_patient)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.addtime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.age)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.type_kashf)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.paied)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.code)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name_patient)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.phone_patient)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.adress_patient)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.addtime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.age)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.type_kashf)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.paied)
+                    </td>
+                    <td>
+                        @*<a asp-action="Edit" asp-route-id="@item.idpatiend" class="btn btn-success">
+                            تعديل
+                            <i class="fa fa-edit"></i>
+                        </a>*@
+                        <a asp-action="Details" asp-route-id="@item.idpatiend" class="btn btn-primary text-white">
+                            تفاصيل التاريخ المرضى
+                            <i class="fa fa-list"></i>
+                        </a>
+                        @*<a asp-action="Delete" asp-route-id="@item.idpatiend" class="btn btn-danger" onclick="return confirm('هل تريد حذف المريض المحدد')">
+                            حذف
+                            <i class="fa fa-trash"></i>
+                        </a>*@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section scripts{
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#mytable').DataTable();
+        });
+    </script>
+    }

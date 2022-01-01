@@ -1,0 +1,218 @@
+﻿
+
+@{
+    ViewData["Title"] = "admin";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+<div class="content-wrapper">
+
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    @*<h1 class="m-0" style="color: rgb(31,108,163);"><span class="fa fa-database accent-green fa-fw"></span>DATABASE COMPANY</h1>*@
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <section class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-12 col-sm-6 col-md-6">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">اجمالى المرضى اليومى فى العياده</span>
+                            <span class="info-box-number text-danger">
+                                @ViewBag.count
+                            </span>
+                        </div>
+
+                    </div>
+
+                </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-6">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-info elevation-1"><i class="fas fa-money-bill-wave"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">اجمالى الكشوفات والاستشارات اليوميه</span>
+                            <span class="info-box-number text-danger">
+                                @ViewBag.total
+                            </span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-6">
+                    <div class="info-box mb-3">
+                        <span class="info-box-icon bg-success elevation-1"><i class="fas fa-money-bill"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">اجمالى ايرادات العياده اليوميه</span>
+                            <span class="info-box-number text-danger"> @ViewBag.totaldayirad</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="clearfix hidden-md-up"></div>
+
+                <div class="col-12 col-sm-6 col-md-6">
+                    <div class="info-box mb-3">
+                        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-money-check"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">اجمالى مصروفات العياده اليوميه</span>
+                            <span class="info-box-number text-danger">@ViewBag.totalday </span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="clearfix hidden-md-up"></div>
+
+                <div class="col-12 col-sm-6 col-md-6">
+                    <div class="info-box mb-3">
+                        <span class="info-box-icon bg-info elevation-1"><i class="fas fa-address-card"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">عدد حجز المرضى اون لاين</span>
+                            <span class="info-box-number text-danger">@ViewBag.online</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="clearfix hidden-md-up"></div>
+
+                <div class="col-12 col-sm-6 col-md-6">
+                    <div class="info-box mb-3">
+                        <span class="info-box-icon bg-indigo elevation-1"><i class="fas fa-money-bill-alt"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">صافى ايرادات العياده اليوميه</span>
+                            <span class="info-box-number text-danger">@ViewBag.profit</span>
+                        </div>
+
+                    </div>
+
+                </div>
+               
+            </div>
+            <div class="row mt-5">
+                <div class="container">
+                   
+                    <div class="card-columns">
+                        <div class="card bg-dark">
+                            <div class="card-body text-center">
+                                <p class="card-text">اجمالى عدد المرضى الذين زاره العياده حتى تاريخه</p>
+                                <h2 class="text-danger font-weight-bold">@ViewBag.patientcoubt</h2>
+                            </div>
+                        </div>
+                        <div class="card bg-success">
+                            <div class="card-body text-center">
+                                <p class="card-text">اجمالى عدد المرضى الذين حجزو اون لاين حتى تاريخه</p>
+                                <h2 class="text-danger font-weight-bold">@ViewBag.onlinecount</h2>
+                            </div>
+                        </div>
+                        <div class="card bg-primary">
+                            <div class="card-body text-center">
+                                <p class="card-text">اجمالى عدد الادويه الموجوده بالعياده حتى تاريخه</p>
+                                <h2 class="text-danger font-weight-bold">@ViewBag.adweyacount</h2>
+                            </div>
+                        </div>
+                    </div>
+                        
+                </div>
+                
+            </div>
+
+            @*<div class="row mr-0">
+
+            <div class="col-md-6">
+                <div id="piechart" style="width: 500px; height: 300px;"></div>
+            </div>
+            <div class="col-md-6">
+
+
+                <div id="columnchart_values" style="width: 600px; height: 300px;"></div>
+            </div>
+
+
+
+        </div>*@
+        
+            
+       
+    </section>
+</div>
+@section scripts{
+
+    @*<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Topping');
+            data.addColumn('number', 'Slices');
+            //data.addRows([
+            //    ['Mushrooms', 3],
+            //    ['Onions', 1],
+            //    ['Olives', 1],
+            //    ['Zucchini', 1],
+            //    ['Pepperoni', 2]
+          /*  ]);*/
+
+            var options = {
+                title: 'My Daily Activities',
+                 is3D: true,
+            };
+
+
+
+            var chart = new google.visualization.ColumnChart(document.getElementById('columnchart_values'));
+
+            chart.draw(data, options);
+            //bar char//
+            var data = google.visualization.arrayToDataTable([
+                ['Task', 'Hours per Day'],
+                ['Work', 11],
+                ['Eat', 2],
+                ['Commute', 2],
+                ['Watch TV', 2],
+                ['Sleep', 7]
+            ]);
+
+            var options = {
+                title: 'My Daily Activities',
+                is3D: true,
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+            chart.draw(data, options);
+
+        }
+    </script>*@
+
+
+}

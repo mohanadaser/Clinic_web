@@ -1,0 +1,137 @@
+﻿@model IEnumerable<ADweya>
+@{
+    ViewData["Title"] = "reportadweya";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<br />
+
+<div class="container" style="background-color:darkmagenta;">
+    <h3 class="text-center" style="color:white">تقرير بجميع الادويه الخاصه بالعياده</h3>
+</div>
+<div class="row" style="margin-top:30px">
+    <div class="col-md-4">
+
+        <input type="button" value="print" class="btn btn-success" onclick="PrintAdweya()" />
+    </div>
+    <div class="col-md-4">
+        <input class="form-control" id="myInput" type="text" placeholder="Search.." style="background-color:azure">
+    </div>
+
+</div>
+<div class="row"id="divprint">
+
+    <div class="col-md-12">
+        <table class="table table-bordered table-striped"id="mytb" style="margin-top:50px;font-size:large;text-align:center">
+            <thead style="background-color: aqua;">
+                <tr>
+                    <td>
+                        اسم الدواء
+                    </td>
+                    <td>
+                        اسم المندوب
+                    </td>
+                    <td>
+                        رقم التليفون
+                    </td>
+                    <td>
+                        دواعى الاستعمال
+                    </td>
+
+                </tr>
+            </thead>
+            <tbody style="font-size:larger;text-align:center" id="myTable">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.name_adweya
+                        </td>
+                        <td>
+                            @item.supplier_adweya
+                        </td>
+                        <td>
+                            @item.tel
+                        </td>
+                        <td>
+                            @item.uses_adwya
+                        </td>
+
+                    </tr>
+                }
+        </table>
+
+    </div>
+</div>
+@section Scripts{
+
+
+    <script src="~/js/site.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            /*  $('#example').DataTable();*/
+            $("#myInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+
+        function PrintAdweya() {
+            printJS({
+                printable: 'divprint',
+                type: 'html',
+                targetStyles: ['*'],
+                header: 'تقارير الادويه الخاصه بالعياده',
+
+
+            });
+
+
+        }
+
+
+        // لطباعة صفحة باكملها
+        //function PrintElem() {
+
+        //    window.print();
+
+
+        //}
+
+
+        //});
+
+        //function PrintElem(elem) {
+        //    Popup($(elem).html());
+        //}
+
+        //function Popup(data) {
+        //    var myWindow = window.open('', 'تقرير المرضى', 'height=900,width=800');
+        //    myWindow.document.write('<html><head><title>تقرير المرضى</title>');
+        //    myWindow.document.write('<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css" type="text/css" />');
+        //    myWindow.document.write('</head><body >');
+        //    myWindow.document.write(data);
+        //    myWindow.document.write('</body></html>');
+
+        //    myWindow.document.close(); // necessary for IE >= 10
+
+        //    myWindow.onload = function () { // necessary if the div contain images
+
+        //        myWindow.focus(); // necessary for IE >= 10
+
+        //        myWindow.print();
+        //        //myWindow.close();
+        //    };
+        //}
+
+        // خاص بالبحث
+       
+
+
+    </script>
+}

@@ -1,0 +1,89 @@
+﻿@model Online
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<br />
+<br />
+
+<form asp-action="Create">
+
+    <div class="row" style="margin-top: 60px;">
+
+        <div class="col-md-4" style="background-color:azure">
+            @if (ViewBag.issuccess)
+            {
+
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>تم التسجيل بنجاح</strong> .
+                </div>
+            }
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="name_online" class="control-label"></label>
+                <input asp-for="name_online" class="form-control" />
+                <span asp-validation-for="name_online" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="adress_online" class="control-label"></label>
+                <input asp-for="adress_online" class="form-control" />
+                <span asp-validation-for="adress_online" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="phone_online" class="control-label"></label>
+                <input asp-for="phone_online" class="form-control" />
+                <span asp-validation-for="phone_online" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="date_online" class="control-label"></label>
+                <input type="date" asp-for="date_online"id="dateonline" class="form-control" />
+                <span asp-validation-for="date_online" class="text-danger"></span>
+            </div>
+
+            <div class="form-group ">
+                <label asp-for="description" class="control-label"></label>
+                <textarea asp-for="description" class="form-control"></textarea>
+
+                <span asp-validation-for="description" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <input type="submit" value="تسجيل الحجز" class="btn btn-primary" />
+            </div>
+
+        </div>
+        <div class="form-group col-md-8">
+            <img src="~/img/203-2035339_register-user-register-online-icon-png.png" style="width:900px;height:500px" />
+        </div>
+    </div>
+
+
+</form>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript">
+        $(function () {
+            $('#dateonline').datepicker({
+                numberOfmonths: 1,
+                changeYear: true,
+                changemonth: true,
+                showOthermonths: true
+                //    uiLibrary: 'bootstrap4',
+                //    modal: true,
+                //    footer: true
+            });
+
+        }
+           
+    </script>
+    
+    }

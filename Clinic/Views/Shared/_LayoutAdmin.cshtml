@@ -1,0 +1,281 @@
+﻿
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MyClinic4U</title>
+
+
+    <!----------------------------------------->
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/asset/css/style.css">
+    <link rel="stylesheet" href="~/asset/css/adminlte.min.css">
+   
+    <link rel="stylesheet" href="~/asset/fontawesome/css/all.min.css">
+    <link href="~/css/print.min.css" rel="stylesheet" />
+    <!-------------------------------خاص بالبحث والفلتره بالجداول-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <!------------------------خاص بالوقت والتاريخ datetimepicker---->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+
+    @*<link href="~/asset/tables/datatables-bs4/css/dataTables.bootstrap4.css" rel="stylesheet" />
+        <link href="~/asset/tables/datatables-responsive/css/responsive.bootstrap4.css" rel="stylesheet" />
+        <link href="~/asset/tables/datatables-buttons/css/buttons.bootstrap4.css" rel="stylesheet" />*@
+
+    <link rel="stylesheet" href="~/asset/css/adminlte.min.css">
+    <link rel="shortcut icon" href="~/Db.png">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style type="text/css">
+        body{
+            height:1000px;
+
+
+        }
+        td a.btn {
+            font-size: 14px;
+        }
+
+        td p {
+            padding-left: 0.5rem !important;
+        }
+
+        th {
+            padding: 1rem !important;
+        }
+
+        table tr td {
+            padding: 0.3rem !important;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background-color: rgba(62,88,113);">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>
+            </ul>
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto ">
+
+                <li class="nav-item">
+                    <a class="nav-link text-white" data-widget="fullscreen" href="#" role="button">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-danger" data-widget="fullscreen" href="../index.html">
+                        <i class="fas fa-power-off"></i>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+        <!-- /.navbar -->
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: rgba(44,62,80);">
+            <!-- Brand Logo -->
+            @*<a href="index.html" class="brand-link animated swing">
+                    <img src="/img/Db.png" alt="DSMS Logo" width="50"height="50">
+                </a>*@
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <li class="nav-item">
+                            <a asp-controller="home" asp-action="admin" class="nav-link">
+                                <i class="nav-icon fa fa-tachometer-alt"></i>
+                                <p>
+                                    Dashboard
+                                </p>
+                            </a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-address-card"></i>
+                                <p>
+                                    تسجبل المرضى
+                                </p>
+                                <i class="right fas fa-angle-left"></i>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a asp-controller="patient" asp-action="index" class="nav-link">
+                                        <i class="nav-icon fa fa-address-book"></i>
+                                        <p>الشاشة الرئيسيه</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-controller="patient" asp-action="create" class="nav-link">
+
+                                        <i class="nav-icon fa fa-person-booth"></i>
+                                        <p>تسجيل مريض جديد</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-controller="patient" asp-action="Search" class="nav-link">
+
+                                        <i class="nav-icon fa fa-search-plus"></i>
+                                        <p>البحث عن جميع المرضى</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a asp-controller="adweya" asp-action="index" class="nav-link">
+                                <i class="nav-icon fa fa-plus"></i>
+                                <p>
+                                    تسجيل الادويه
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="masrofat" asp-action="index" class="nav-link">
+                                <i class="nav-icon fa fa-money-check"></i>
+                                <p>
+                                    تسجيل المصروفات
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="iradat" asp-action="index" class="nav-link">
+                                <i class="nav-icon fa fa-money-bill-wave"></i>
+                                <p>
+                                    تسجيل الايرادات
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-user-lock"></i>
+                                <p>
+                                    المستخدمين
+                                </p>
+                                <i class="right fas fa-angle-left"></i>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a asp-controller="users" asp-action="index" class="nav-link">
+                                        <i class="nav-icon fa fa-plus"></i>
+                                        <p>ادارة المستخدمين</p>
+                                    </a>
+                                </li>
+                                <!--<-->@*li class="nav-item">
+                                        <a asp-controller="users"asp-action="edit" class="nav-link">
+                                            <i class="nav-icon fa fa-address-book"></i>
+                                            <p>تعديل المستخدمين</p>
+                                        </a>
+                                    </li>*@
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-chart-bar"></i>
+                                <p>
+                                    التقارير
+                                </p>
+                                <i class="right fas fa-angle-left"></i>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a asp-controller="reports" asp-action="reportadweya" class="nav-link">
+                                        <i class="nav-icon fa fa-plus-circle"></i>
+                                        <p>تقارير الادويه</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-controller="reports" asp-action="reportiradat" class="nav-link">
+                                        <i class="nav-icon fa fa-money-check"></i>
+                                        <p>تقارير الايرادات</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-controller="reports" asp-action="reportmasrofat" class="nav-link">
+                                        <i class="nav-icon fa fa-money-bill"></i>
+                                        <p>تقارير المصروفات</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-controller="reports" asp-action="reportonline" class="nav-link">
+                                        <i class="nav-icon fas fa-address-card"></i>
+                                        <p>تقارير الحجز اون لاين</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-controller="reports" asp-action="reportpatient" class="nav-link">
+                                        <i class="nav-icon fa fa-person-booth"></i>
+                                        <p>تقارير المرضى</p>
+                                    </a>
+                                </li>
+                                @*<li class="nav-item">
+                                        <a href="center-report.html" class="nav-link">
+                                            <i class="nav-icon fa fa-hospital-alt"></i>
+                                            <p>Evacuees by Center</p>
+                                        </a>
+                                    </li>*@
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+    </div>
+
+    <!-- Content Wrapper. Contains page content -->
+    <!-- /.container-fluid -->
+    <!-- /.content -->
+
+
+
+    <div class="content-wrapper text-center">
+        <main role="main" class="pb-1 ar">
+            @RenderBody()
+        </main>
+    </div>
+
+
+
+    <script src="~/asset/jquery/jquery.min.js"></script>
+    <script src="~/asset/js/adminlte.js"></script>
+    <script src="~/asset/js/popper.min.js"></script>
+    <script src="~/assets/js/bootstrap.min.js"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
+    <script src="~/js/print.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-----------------------------------خاص بالوقت والتاريخ datetimepicker-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+
+    <!-------------------------------------------------خاص بالبحث والفلتره-->
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js"></script>
+
+
+    @RenderSection("Scripts", required: false)
+
+
+
+
+
+</body>
+</html>

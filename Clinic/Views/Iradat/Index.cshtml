@@ -1,0 +1,88 @@
+﻿@model IRadat
+@{
+    ViewData["Title"] = "Index";
+  Layout="~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<br />
+<br />
+<div class="container" style="background-color:darkmagenta;">
+    <h2 class="text-center" style="color:white">الايرادات اليوميه</h2>
+</div>
+<form style="margin-top:50px;background-color:azure;margin-right:20px;" asp-action="create">
+    <div class="row">
+        <div class="form-group col-4">
+            <label>نوع الايراد</label>
+            <textarea type="text" asp-for="irad_type" class="form-control"></textarea>
+
+            <span class="text-danger"asp-validation-for="irad_type"></span>
+
+            <label>قيمة الايراد</label>
+            <input type="number" asp-for="amount" class="form-control" />
+            <span class="text-danger" asp-validation-for="amount"></span>
+
+        </div>
+        <div class="form-group col-4">
+            <h1 class="text-dark text-center">اجمالى ايراد اليوم</h1>
+            <h2 class="text-danger text-center" style="border:solid#000000">@ViewBag.totaldayirad</h2>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="form-group col-4">
+            <button type="submit" asp-action="Create" class="btn btn-primary">حفظ الايراد</button>
+        </div>
+    </div>
+
+</form>
+
+
+<div class="col-md-6">
+
+    <table class="table table-bordered table-striped" style="margin-top:50px;">
+        <thead style="background-color: aqua;">
+            <tr>
+                <th>
+                    نوع الايراد
+                </th>
+                <th>
+                    تاريخ التوريد
+                </th>
+                <th>
+                    مبلغ التوريد
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (IRadat iradat in ViewBag.iradat)
+            {
+                <tr>
+                    <td>
+                        @iradat.irad_type
+                    </td>
+                    <td>
+                        @iradat.addtime_irad
+                    </td>
+                    <td>
+                        @iradat.amount
+                    </td>
+                    <td>
+
+                        <a asp-action="Delete" class="btn btn-danger" asp-route-id="@iradat.id_irad" onclick="return confirm('هل تريد حذف العنصر المحدد؟')">
+                            حذف
+                            <i class="fa fa-trash"></i>
+
+                        </a>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

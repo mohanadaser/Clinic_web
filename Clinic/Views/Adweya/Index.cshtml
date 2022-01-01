@@ -1,0 +1,131 @@
+﻿@model ADweya
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<br />
+<br />
+
+<div class="container" style="background-color:darkmagenta;">
+    <h3 class="text-center" style="color:white">تسجيل الادويه الخاصه بالعياده</h3>
+</div>
+<form style="margin-top:30px;background-color:azure;margin-right:10px;" asp-action="create">
+    <div class="row">
+        <div class="form-group col-4">
+            <label>اسم الدواء</label>
+            <input type="text" asp-for="name_adweya" class="form-control"placeholder="اسم الدواء" />
+
+            <span class="text-danger" asp-validation-for="name_adweya"></span>
+        </div>
+        <div class="form-group col-4">
+            <label>اسم المندوب</label>
+            <input type="text" asp-for="supplier_adweya" class="form-control"placeholder="اسم المندوب" />
+            <span class="text-danger" asp-validation-for="supplier_adweya"></span>
+        </div>
+        <div class="form-group col-3">
+            <label>رقم تليفون المندوب</label>
+            <input type="number" asp-for="tel" class="form-control"placeholder="رقم التليفون" />
+            <span class="text-danger" asp-validation-for="tel"></span>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="form-group col-4">
+            <label>استخدامات الدواء</label>
+            <textarea asp-for="uses_adwya" class="form-control"></textarea>
+            <span asp-validation-for="uses_adwya"></span>
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        <div class="form-group col-4">
+            <button type="submit" asp-action="Create" class="btn btn-primary"style="width:50%">حفظ </button>
+        </div>
+    </div>
+
+</form>
+
+
+<div class="col-md-10">
+
+    <table class="table table-bordered table-striped" style="margin-top:50px;" id="mytb">
+        <thead style="background-color: aqua;">
+            <tr>
+                <th>
+                    اسم الدواء
+                </th>
+                <th>
+                    اسم المندوب
+                </th>
+                <th>
+                    رقم التليفون
+                </th>
+                <th>
+                    دواعى الاستعمال
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ADweya aDweya in ViewBag.adweya)
+            {
+                <tr>
+                    <td>
+                        @aDweya.name_adweya
+                    </td>
+                    <td>
+                        @aDweya.supplier_adweya
+                    </td>
+                    <td>
+                        @aDweya.tel
+                    </td>
+                    <td>
+                        @aDweya.uses_adwya
+                    </td>
+                    <td>
+                        <a type="button" class="btn btn-primary"asp-route-id="@aDweya.id_adweya"asp-action="Edit" >
+                            تعديل
+                            <i class="fa fa-edit"></i>
+                        </a>
+
+                        <a type="button" class="btn btn-primary"asp-route-id="@aDweya.id_adweya"asp-action="Details" >
+                            تفاصيل استخدامات الدواء
+                            <i class="fa fa-list"></i>
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@aDweya.id_adweya" class="btn btn-danger" onclick="return confirm('هل تريد حذف هذا الدواء')">
+                            حذف
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+
+
+@section Scripts {
+
+
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+    @*<script src="~/js/site.js"></script>*@
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#mytb').DataTable();
+
+        })
+
+
+
+    </script>
+}
+

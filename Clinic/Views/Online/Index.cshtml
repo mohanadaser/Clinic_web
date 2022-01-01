@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Online>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<br />
+<br />
+
+<div class="container" style="background-color:darkmagenta">
+    <h3 class="text-center" style="color:white">  الحجوزات عن طريق النت </h3>
+</div>
+
+
+<div class="row"id="divprint">
+    <div class="col-md-12">
+        <table class="table table-bordered table-striped table-hover" style="margin-top:20px;" id="mytable">
+
+            <thead style="background-color:aquamarine;">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.name_online)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.adress_online)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.phone_online)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.date_online)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.description)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.name_online)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.adress_online)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.phone_online)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.date_online)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.description)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.id_online" class="btn btn-success">
+                                تعديل
+                                <i class="fa fa-edit"></i>
+                            </a>
+
+                            <a asp-action="Delete" asp-route-id="@item.id_online" class="btn btn-danger" onclick="return confirm('هل تريد حذف المريض المحدد')">
+                                حذف
+                                <i class="fa fa-trash-o"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+
+
+@section scripts{
+
+    <script src="~/js/site.js"></script>
+    <script type="text/javascript">
+       
+    </script>
+}

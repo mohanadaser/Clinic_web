@@ -1,0 +1,157 @@
+﻿@model IEnumerable<patient>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+
+    .selected {
+        background-color:red;
+        font-weight: bold;
+        color:#ff0000;
+    }
+</style>
+
+<br />
+<br />
+<div class="row">
+    <div class="col-md-3">
+        <div>
+            <p>
+                <a asp-action="Create" class="btn btn-primary">
+                    انشا جديد
+                    <i class="fa fa-plus"></i>
+                </a>
+            </p>
+        </div>
+    </div>
+    <div class="col-md-3" style="margin-top:20px;">
+        <h1 class="text-info text-center">  اجمالى اليوم</h1>
+        <h2 class="text-danger text-center" style="border:solid#000000">@ViewBag.total</h2>
+    </div>
+    <div class="col-md-3" style="margin-top:20px;">
+        <h1 class="text-info text-center"> استشاره اليوم</h1>
+        <h2 class="text-danger text-center" style="border:solid#000000">@ViewBag.stsh</h2>
+    </div>
+    <div class="col-md-3" style="margin-top:20px;">
+        <h1 class="text-info text-center"> كشف اليوم</h1>
+        <h2 class="text-danger text-center" style="border:solid#000000">@ViewBag.eda</h2>
+    </div>
+</div>
+
+
+
+<table class="table table-bordered table-striped table-hover" style="margin-top:30px;" id="mytable">
+    <thead style="background-color:aquamarine;">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.name_patient)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.phone_patient)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.adress_patient)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.addtime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.type_kashf)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.paied)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name_patient)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.phone_patient)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.adress_patient)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.addtime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.age)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.type_kashf)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.paied)
+                </td>
+                <td>
+                    <button class="btn btn-primary"onclick="selectedRow();">تم الكشف</button>
+                    <a asp-action="Edit" asp-route-id="@item.idpatiend" class="btn btn-success">
+                        تعديل
+                        <i class="fa fa-edit"></i>
+                    </a>
+
+                    @*<a asp-action="Details" asp-route-id="@item.idpatiend" class="btn btn-primary">
+                            تفاصيل التاريخ المرضى
+                            <i class="fa fa-list"></i>
+                        </a>*@
+                    <a asp-action="Delete" asp-route-id="@item.idpatiend" class="btn btn-danger" onclick="return confirm('هل تريد حذف المريض المحدد')">
+                        حذف
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section scripts{
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#mytable').DataTable();
+        });
+
+        function selectedRow() {
+
+            var index,
+                table = document.getElementById("mytable");
+
+            for (var i = 1; i < table.rows.length; i++) {
+                table.rows[i].onclick = function () {
+                    // remove the background from the previous selected row
+                    //if (typeof index !== "undefined") {
+                    //    table.rows[index].classList.toggle("selected");
+                    //}
+                    /*  console.log(typeof index);*/
+                    // get the selected row index
+                    index = this.rowIndex;
+                    // add class selected to the row
+                    this.classList.toggle("selected");
+                    /* console.log(typeof index);*/
+                };
+            }
+
+        }
+
+    </script>
+}

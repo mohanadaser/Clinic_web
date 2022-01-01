@@ -1,0 +1,24 @@
+﻿@model patient
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<br />
+<br />
+<script src="~/ckeditor/ckeditor.js"></script>
+<div class="row"style="margin-top:50px">
+    <div class="form-group col-8">
+
+        <label asp-for="notes" class="control-label"></label>
+        <textarea asp-for="notes" class="form-control" id="notes"disabled="disabled"></textarea>
+        </div>
+    </div>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+    <script>
+        CKEDITOR.replace("notes");
+    </script>
+      
+

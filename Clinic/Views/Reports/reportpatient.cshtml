@@ -1,0 +1,202 @@
+﻿@model IEnumerable<patient>
+@{
+    ViewData["Title"] = "reportpatient";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<br />
+<br />
+<div class="container" style="background-color:darkmagenta;">
+    <h3 class="text-center" style="color:white">زيارات المرضى خلال فتره</h3>
+</div>
+<form asp-action="reportpatient" asp-controller="Reports" style="margin-top:20px">
+
+    <div class="row">
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label style=" font-size:large">من تاريخ</label>
+                <input type="text" id="datefrom" name="datefrom" class="form-control" style="background-color:azure" placeholder="@ViewBag.datefrom" />
+
+            </div>
+
+            <div class="form-group">
+                <label style=" font-size:large">الى تاريخ</label>
+                <input type="text" id="dateto" name="dateto" class="form-control" style="background-color:azure" placeholder="@ViewBag.dateto" />
+
+            </div>
+            <div class="form-group">
+                <input type="submit" value="عرض التقرير" asp-action="reportpatient" class="btn btn-primary" />
+            </div>
+
+        </div>
+        <div class="col-md-4" style="margin-right:10px">
+            <h3 class="text-info text-center"> اجمالى المبلغ المدفوع خلال الفتره</h3>
+            <h2 class="text-danger text-center" style="border:solid#000000">@ViewBag.totalamount</h2>
+        </div>
+
+
+
+    </div>
+
+
+
+    <hr />
+    <input type="button" value="print" class="btn btn-success" onclick="PrintPatient()" />
+    <hr />
+    <div class="col-md-4">
+        <input class="form-control" id="myInput" type="text" placeholder="Search.." style="background-color:azure">
+    </div>
+    <hr />
+    <div class="row" id="divprint">
+        <div class="col-md-12">
+            <div class="content-panel">
+                <h4><i class="fa fa-angle-right"></i> تقارير زيارات المرضى خلال فتره</h4>
+
+                <table class="table table-bordered table-striped" id="example">
+                    <thead style="background-color:darkmagenta;color:white;font-size:large;text-align:center">
+                        <tr>
+                            <td>
+                                اسم المريض
+                            </td>
+                            <td>
+                                العنوان
+                            </td>
+                            <td>
+                                السن
+                            </td>
+                            <td>
+                                الحاله المرضيه
+                            </td>
+                            <td>
+                                المبلغ المدفوع
+                            </td>
+                        </tr>
+
+                    </thead>
+                    <tbody style="font-size:larger;text-align:center" id="myTable">
+                        @foreach (var item in Model)
+
+                        {
+                            <tr>
+                                <td>
+                                    @item.name_patient
+                                </td>
+                                <td>
+                                    @item.adress_patient
+                                </td>
+                                <td>
+                                    @item.age
+                                </td>
+                                <td>
+                                    @Html.Raw(item.notes)
+                                </td>
+                                <td>
+                                    @item.paied
+                                </td>
+
+
+                            </tr>
+
+                        }
+
+
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+</form>
+@section Scripts{
+
+    <script src="~/js/print.min.js"></script>
+    <script src="~/js/site.js"></script>
+
+    <script type="text/javascript">
+
+
+        function PrintPatient() {
+            printJS({
+                printable: 'divprint',
+                type: 'html',
+                targetStyles: ['*'],
+                header: 'تقارير المرضى بالعياده'
+
+
+            });
+        }
+
+        // لطباعة صفحة باكملها
+        //function PrintElem() {
+
+        //    window.print();
+
+
+        //}
+
+
+        //});
+
+        @*function PrintElem(elem) {
+            Popup($(elem).html());
+        }
+
+        function Popup(data) {
+            var myWindow = window.open('', 'تقرير المرضى', 'height=900,width=800');
+            myWindow.document.write('<html><head><title>تقرير المرضى</title>');
+            myWindow.document.write('<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css" type="text/css" />');
+            myWindow.document.write('</head><body >');
+            myWindow.document.write(data);
+            myWindow.document.write('</body><h1>الاجمالى:@ViewBag.totalamount</h1></html>');
+
+            myWindow.document.close(); // necessary for IE >= 10
+
+            myWindow.onload = function () { // necessary if the div contain images
+
+                myWindow.focus(); // necessary for IE >= 10
+
+                myWindow.print();
+                //myWindow.close();
+            };
+        }*@
+
+
+
+        // خاص بالبحث
+        $(document).ready(function () {
+
+          /*  $('#example').DataTable();*/
+            $("#myInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+
+            $(function () {
+                $('#datefrom').datepicker({
+                    numberOfmonths: 1,
+                    changeYear: true,
+                    changemonth: true,
+                    showOthermonths: true
+                });
+
+                //uiLibrary: 'bootstrap4'
+
+
+                $('#dateto').datepicker({
+                    numberOfmonths: 1,
+                    changeYear: true,
+                    changemonth: true,
+                    showOthermonths: true
+                });
+            });
+
+
+    </script>
+}
+
+
+

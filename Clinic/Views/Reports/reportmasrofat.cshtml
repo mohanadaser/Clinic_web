@@ -1,0 +1,173 @@
+﻿@model IEnumerable<Masrofat>
+@{
+    ViewData["Title"] = "reportmasrofat";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+}
+<br />
+<br />
+<div class="container" style="background-color:darkmagenta;">
+    <h3 class="text-center" style="color:white">مصروفات العياده خلال فتره</h3>
+</div>
+<form asp-action="reportmasrofat" asp-controller="Reports" style="margin-top:20px">
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label style=" font-size:large">من تاريخ</label>
+                <input type="text" id="datefrom" name="datefrom" class="form-control"placeholder="@ViewBag.datefrom" />
+
+            </div>
+
+            <div class="form-group">
+                <label style=" font-size:large">الى تاريخ</label>
+                <input type="text" id="dateto" name="dateto" class="form-control"placeholder="@ViewBag.dateto" />
+
+            </div>
+            <div class="form-group">
+                <input type="submit" value="عرض التقرير" asp-action="reportmasrofat" class="btn btn-primary" />
+            </div>
+
+        </div>
+        <div class="col-md-4"style="margin-right:10px">
+             <h3 class="text-info text-center"> اجمالى المصروفات خلال الفتره</h3>
+            <h2 class="text-danger text-center" style="border:solid#000000">@ViewBag.total</h2>
+        </div>
+
+    </div>
+
+
+
+    <hr />
+    <input type="button" value="print" class="btn btn-success" onclick="PrintMasrofat()" />
+    <hr />
+    <div class="row" id="divprint">
+        <div class="col-md-12">
+            <div class="content-panel">
+                <h4><i class="fa fa-angle-right"></i> تقاريرالمصروفات خلال فتره</h4>
+
+                <table class="table table-bordered table-hover">
+                    <thead style="background-color:darkmagenta;color:white;font-size:large;text-align:center">
+                        <tr>
+                            <td>
+                                نوع المصروف
+                            </td>
+                            <td>
+                                تاريخ الصرف
+                            </td>
+                            <td>
+                                المبلغ
+                            </td>
+
+                        </tr>
+
+                    </thead>
+                    <tbody style="font-size:larger;text-align:center">
+                        @foreach (var item in Model)
+
+                        {
+                            <tr>
+                                <td>
+                                    @item.masrof_type
+                                </td>
+                                <td>
+                                    @item.addtime_masrof
+                                </td>
+                                <td>
+                                    @item.amount
+                                </td>
+
+
+                            </tr>
+
+                        }
+
+
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+</form>
+@section Scripts{
+
+
+    <script src="~/js/site.js"></script>
+   
+
+    <script type="text/javascript">
+
+
+        function PrintMasrofat() {
+            printJS({
+                printable: 'divprint',
+                type: 'html',
+                targetStyles: ['*'],
+                header: 'تقارير المصروفات الخاصه بالعياده'
+
+
+            });
+
+
+        }
+         // لطباعة صفحة باكملها
+        //function PrintElem() {
+
+        //    window.print();
+
+
+        //}
+
+        //لطباعة البيانات الموجوده بالجدول فقط
+        @*function PrintElem(elem) {
+            Popup($(elem).html());
+        }
+
+        function Popup(data) {
+            var myWindow = window.open('', 'my div', 'height=900,width=800');
+            myWindow.document.write('<html><head><title>my div</title>');
+            myWindow.document.write('<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css" type="text/css" />');
+            myWindow.document.write('</head><body >');
+            myWindow.document.write(data);
+            myWindow.document.write('</body><h1>@ViewBag.total</h1></html>');
+            myWindow.document.close(); // necessary for IE >= 10
+
+            myWindow.onload = function () { // necessary if the div contain images
+
+                myWindow.focus(); // necessary for IE >= 10
+                myWindow.print();
+                //myWindow.close();
+            };
+        }*@
+
+
+        $(function () {
+            $('#datefrom').datepicker({
+                numberOfmonths: 1,
+                changeYear: true,
+                changemonth: true,
+                showOthermonths: true
+
+                //uiLibrary: 'bootstrap4',
+                //modal: true,
+                //footer: true
+            });
+
+                //uiLibrary: 'bootstrap4'
+
+
+            $('#dateto').datepicker({
+                numberOfmonths: 1,
+                changeYear: true,
+                changemonth: true,
+                showOthermonths: true
+            });
+        });
+
+
+    </script>
+}
+
+
